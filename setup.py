@@ -29,16 +29,23 @@ try:
 except ImportError:
     from distutils.core import setup
 
-import updown
+import re
+import ast
+
+_version_re = re.compile(r'__version__\s+=\s+(.*)')
+
+with open('updown/__init__.py', 'rb') as f:
+    version = str(ast.literal_eval(_version_re.search(
+        f.read().decode('utf-8')).group(1)))
 
 setup(name='updown',
-      version = updown.__version__,
+      version = version,
       description='3rd-party Python interface to Updown.io API',
       author='Brandon Hamilton',
       author_email='brandon.hamilton@gmail.com',
       url = 'http://github.com/brandonhamilton/updown-python',
       packages=['updown'],
-      install_requires=[ 'requests[security]' ],
+      install_requires=[ 'requests' ],
       license = 'MIT',
       classifiers = [ 'Development Status :: 3 - Alpha',
                       'Intended Audience :: Developers',
