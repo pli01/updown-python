@@ -77,7 +77,7 @@ class Check:
                 setattr(self, attr, value)
         else:
             r = _performRequest('POST', data=self._toObject())
-            for attr, value in r.itmes():
+            for attr, value in r.items():
                 setattr(self, attr, value)
 
     def delete(self):
